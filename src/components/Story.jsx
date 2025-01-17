@@ -46,15 +46,15 @@ const FloatingImage = () => {
   };
 
   return (
-    <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
-      <div className="flex size-full flex-col items-center py-10 pb-24">
+    <div id="story" className="min-h-dvh w-screen mt-0 bg-black text-blue-50">
+      <div className="flex size-full flex-col items-center py-5 pb-24">
         <p className="font-general text-sm uppercase md:text-[10px]">
-          the multiversal ip world
+          in-depth business solutions
         </p>
 
         <div className="relative size-full">
           <AnimatedTitle
-            title="the st<b>o</b>ry of <br /> a hidden real<b>m</b>"
+            title="design and build a thriving creative business"
             containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10"
           />
 
@@ -67,7 +67,7 @@ const FloatingImage = () => {
                   onMouseLeave={handleMouseLeave}
                   onMouseUp={handleMouseLeave}
                   onMouseEnter={handleMouseLeave}
-                  src="/img/entrance.webp"
+                  src="/img/story2.jpg"
                   alt="entrance.webp"
                   className="object-contain"
                 />
@@ -106,14 +106,12 @@ const FloatingImage = () => {
         <div className="-mt-80 flex w-full justify-center md:-mt-64 md:me-44 md:justify-end">
           <div className="flex h-full w-fit flex-col items-center md:items-start">
             <p className="mt-3 max-w-sm text-center font-circular-web text-violet-50 md:text-start">
-              Where realms converge, lies Zentry and the boundless pillar.
-              Discover its secrets and shape your fate amidst infinite
-              opportunities.
+            Choose from hundreds of retail-quality products you can design and start selling right away. We'll handle the headache of end-to-end logistics so that you can focus on the fun stuff.
             </p>
 
             <Button
               id="realm-btn"
-              title="discover prologue"
+              title="browse product catalogue"
               containerClass="mt-5"
             />
           </div>
