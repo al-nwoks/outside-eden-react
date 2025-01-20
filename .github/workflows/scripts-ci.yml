@@ -55,102 +55,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: Development
     if: ${{ (inputs.use-default) }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-      - name: Install npm dependencies
-        working-directory: ./portal
-        run: npm install
-          
-      - name: "Run seed for Dev"
-        if:  ${{ !(inputs.dry-run) && github.event.inputs.environment == 'dev' }}
-        working-directory: ./portal
-        env:
-          DATABASE_URL: postgresql://adminuser:${{ secrets.ENCODED_DEV_DB_PASSWORD }}@npx-dev-psqlflexserver.postgres.database.azure.com:5432/nipex?sslmode=require
-          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
-          RESEND_FROM_EMAIL: "mailer@accounts.nipex-ng.com"
-        run: |
-          npm run ${{ github.event.inputs.seed_name }}
-
-      - name: "Run seed for QA"
-        if: ${{ !(inputs.dry-run) && github.event.inputs.environment == 'qa' }}
-        working-directory: ./portal
-        env:
-          DATABASE_URL: postgresql://adminuser:${{ secrets.ENCODED_QA_DB_PASSWORD }}@npx-qa-psqlflexserver.postgres.database.azure.com:5432/nipex?sslmode=require
-          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
-          RESEND_FROM_EMAIL: "mailer@accounts.nipex-ng.com"
-        run: |
-          npm run ${{ github.event.inputs.seed_name }}
-
-      - name: "Run seed for Prod"
-        if: ${{ !(inputs.dry-run) && github.event.inputs.environment == 'prod' }}
-        working-directory: ./portal
-        env:
-          DATABASE_URL: postgresql://adminuser:${{ secrets.ENCODED_PROD_DB_PASSWORD }}@npx-prod-psqlflexserver.postgres.database.azure.com:5432/nipex?sslmode=require
-          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
-          RESEND_FROM_EMAIL: "mailer@accounts.nipex-ng.com"
-        run: |
-          npm run ${{ github.event.inputs.seed_name }}
+    # steps:
+      
 
 
   run_seed_custom:
     runs-on: ubuntu-latest
     environment: Development
     if: ${{ !(inputs.use-default) }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-      - name: Install npm dependencies
-        working-directory: ./portal
-        run: npm install
-
-      - name: "Run seed for Dev"
-        if:  ${{ !(inputs.dry-run) && github.event.inputs.environment == 'dev' }}
-        working-directory: ./portal
-        env:
-          DATABASE_URL: postgresql://adminuser:${{ secrets.ENCODED_DEV_DB_PASSWORD }}@npx-dev-psqlflexserver.postgres.database.azure.com:5432/nipex?sslmode=require
-          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
-          RESEND_FROM_EMAIL: "mailer@accounts.nipex-ng.com"
-          ADMIN_NAME: ${{ github.event.inputs.admin-name }}
-          ADMIN_EMAIL: ${{ github.event.inputs.admin-email }}
-          SUPER_ADMIN_NAME: ${{ github.event.inputs.superadmin-name }}
-          SUPER_ADMIN_EMAIL: ${{ github.event.inputs.superadmin-email }}
-
-        run: |
-          npm run ${{ github.event.inputs.seed_name }}
-
-      - name: "Run seed for QA"
-        if: ${{ !(inputs.dry-run) && github.event.inputs.environment == 'qa' }}
-        working-directory: ./portal
-        env:
-          DATABASE_URL: postgresql://adminuser:${{ secrets.ENCODED_QA_DB_PASSWORD }}@npx-qa-psqlflexserver.postgres.database.azure.com:5432/nipex?sslmode=require
-          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
-          RESEND_FROM_EMAIL: "mailer@accounts.nipex-ng.com"
-          ADMIN_NAME: ${{ github.event.inputs.admin-name }}
-          ADMIN_EMAIL: ${{ github.event.inputs.admin-email }}
-          SUPER_ADMIN_NAME: ${{ github.event.inputs.superadmin-name }}
-          SUPER_ADMIN_EMAIL: ${{ github.event.inputs.superadmin-email }}
-        run: |
-          npm run ${{ github.event.inputs.seed_name }}
-    
-      - name: "Run seed for Prod"
-        if: ${{ !(inputs.dry-run) && github.event.inputs.environment == 'prod' }}
-        working-directory: ./portal
-        env:
-          DATABASE_URL: postgresql://adminuser:${{ secrets.ENCODED_PROD_DB_PASSWORD }}@npx-prod-psqlflexserver.postgres.database.azure.com:5432/nipex?sslmode=require
-          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
-          RESEND_FROM_EMAIL: "mailer@accounts.nipex-ng.com"
-          ADMIN_NAME: ${{ github.event.inputs.admin-name }}
-          ADMIN_EMAIL: ${{ github.event.inputs.admin-email }}
-          SUPER_ADMIN_NAME: ${{ github.event.inputs.superadmin-name }}
-          SUPER_ADMIN_EMAIL: ${{ github.event.inputs.superadmin-email }}
-        run: |
-          npm run ${{ github.event.inputs.seed_name }}
+    # steps:
+      

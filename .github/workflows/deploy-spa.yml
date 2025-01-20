@@ -38,6 +38,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
 
       - name: Install dependencies
         working-directory: ./
@@ -47,13 +49,11 @@ jobs:
         working-directory: ./
         run: npm run build
 
-      - name: Install AWS CLI
-        run: sudo apt-get install -y awscli
-
       - name: Push to S3
         working-directory: ./
         run: |
           # check if bucket/artifact exists
+          ls -l dist/; 
           aws s3 sync dist s3://demoreactbucket --delete
 
           # clear out bucket content
