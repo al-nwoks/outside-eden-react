@@ -99,15 +99,15 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
 };
 
 const Features = () => (
-  <section className="bg-black pb-10">
+  <section id="features" className="bg-black">
     <div className="container mx-auto px-3 md:px-10">
       <div className="px-5 py-32">
         <p className="font-circular-web text-lg text-blue-50">
           Into the OutsideEden World
         </p>
         <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
-          Immerse yourself in a rich and ever-expanding universe where a vibrant
-          array of products converge into an interconnected overlay experience for your users.
+          Customize your own shop, memberships, and more. <br />
+          Sell to your audience and grow your business on your terms.
         </p>
       </div>
 
@@ -154,7 +154,7 @@ const Features = () => (
         
 
         <BentoTilt className="bento-tilt_2">
-          <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
+          <div className="flex size-full flex-col justify-between bg-green-600 p-5">
             <h1 className="bento-title special-font max-w-64 text-black">
               M<b>o</b>re co<b>m</b>ing s<b>o</b>on.
             </h1>

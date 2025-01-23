@@ -1,127 +1,78 @@
-import clsx from "clsx";
-import gsap from "gsap";
-import { useWindowScroll } from "react-use";
-import { useEffect, useRef, useState } from "react";
-import { TiLocationArrow } from "react-icons/ti";
 
+import { useState } from "react";
 import Button from "./Button";
 
-const navItems = ["Home", "About", "Features", "Contact"];
 
-const NavBar = () => {
-  // State for toggling audio and visual indicator
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+const navLinks = [
+  {
+    id: 1,
+    name: 'Home',
+    href: '#home',
+  },
+  {
+    id: 2,
+    name: 'About',
+    href: '#about',
+  },
+  {
+    id: 3,
+    name: 'Features',
+    href: '#features',
+  },
+  {
+    id: 4,
+    name: 'Contact',
+    href: '#contact',
+  },
+];
+const NavItems = () => {    
+    return ( <ul className="nav-ul">
+        {navLinks.map(({id, href, name}) => (
+           <li key={id} className="nav-li" onClick={() =>{}}>
+                <a href={href} className="nav-li_a">{name}</a>
+            </li>
+        )) }
+  </ul>)
+}
 
-  // Refs for audio and navigation container
-  const audioElementRef = useRef(null);
-  const navContainerRef = useRef(null);
 
-  const { y: currentScrollY } = useWindowScroll();
-  const [isNavVisible, setIsNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // Toggle audio and visual indicator
-  const toggleAudioIndicator = () => {
-    setIsAudioPlaying((prev) => !prev);
-    setIsIndicatorActive((prev) => !prev);
-  };
-
-  // Manage audio playback
-  useEffect(() => {
-    if (isAudioPlaying) {
-      audioElementRef.current.play();
-    } else {
-      audioElementRef.current.pause();
-    }
-  }, [isAudioPlaying]);
-
-  useEffect(() => {
-    if (currentScrollY === 0) {
-      // Topmost position: show navbar without floating-nav
-      setIsNavVisible(true);
-      navContainerRef.current.classList.remove("floating-nav");
-    } else if (currentScrollY > lastScrollY) {
-      // Scrolling down: hide navbar and apply floating-nav
-      setIsNavVisible(false);
-      navContainerRef.current.classList.add("floating-nav");
-    } else if (currentScrollY < lastScrollY) {
-      // Scrolling up: show navbar with floating-nav
-      setIsNavVisible(true);
-      navContainerRef.current.classList.add("floating-nav");
-    }
-
-    setLastScrollY(currentScrollY);
-  }, [currentScrollY, lastScrollY]);
-
-  useEffect(() => {
-    gsap.to(navContainerRef.current, {
-      y: isNavVisible ? 0 : -100,
-      opacity: isNavVisible ? 1 : 0,
-      duration: 0.2,
-    });
-  }, [isNavVisible]);
+const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleMenu = () => {
+        setIsOpen((prevIsOpen) => !prevIsOpen);
+      };
 
   return (
-    <div
-      ref={navContainerRef}
-      className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6"
-    >
-      <header className="absolute top-1/2 w-full -translate-y-1/2">
-        <nav className="flex size-full items-center justify-between p-4">
-          {/* Logo and Product button */}
-          <div className="flex items-center gap-7">
-            <img src="/img/logo.png" alt="logo" className="w-10" />
-
-            <Button
-              id="product-button"
-              title="Get Started"
-              rightIcon={<TiLocationArrow />}
-              containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
-            />
-          </div>
-
-          {/* Navigation Links and Audio Button */}
-          <div className="flex h-full items-center">
-            <div className="hidden md:block">
-              {navItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={`#${item.toLowerCase()}`}
-                  className="nav-hover-btn"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-
-            <button
-              onClick={toggleAudioIndicator}
-              className="ml-10 flex items-center space-x-0.5"
-            >
-              <audio
-                ref={audioElementRef}
-                className="hidden"
-                src="/audio/loop.mp3"
-                loop
-              />
-              {[1, 2, 3, 4].map((bar) => (
-                <div
-                  key={bar}
-                  className={clsx("indicator-line", {
-                    active: isIndicatorActive,
-                  })}
-                  style={{
-                    animationDelay: `${bar * 0.1}s`,
-                  }}
-                />
-              ))}
-            </button>
-          </div>
+    <header className='text-white fixed top-0 left-0 right-0 z-50 bg-black/90'>
+     <div className="max-w-7xl mx-auto">
+      <div className="flex justify-between items-center py-5 mx-auto c-space">
+        <a href="/" className="text-neutral-400 font-bold text-xl hover:text-white transition-colors ">Outside Eden</a>
+        
+        <nav className="sm:flex hidden">
+            <NavItems />
         </nav>
-      </header>
-    </div>
-  );
-};
+        
+        <div className="flex space-x-1">
+        <Button name="Start Now"
+        containerClass="sm:h-10 h-6 text-neutral-400 hover:text-white" href="#contact"/>
+        <button onClick={toggleMenu} className="text-neutral-400  hover:text-white focus:outline-none sm:hidden flex" aria-label="toggle menu">
 
-export default NavBar;
+          <img src={isOpen ? "img/close.svg" : "img/menu.svg"} alt="toggle" className="w-6 h-6"/>
+        </button>
+
+        </div>
+       
+        
+       
+      </div>
+      </div>
+      <div className={`nav-sidebar ${isOpen ? "max-h-screen" : "max-h-0"}`}>
+        <nav className="p-5">
+            <NavItems />
+        </nav>
+      </div>
+    </header>
+  )
+}
+
+export default Navbar
