@@ -5,9 +5,8 @@
 @tailwind utilities;
 
 body {
-  width: 100dvw;
-  overflow-x: hidden;
-  background-color: #dfdff0;
+  
+  background: #010103;
   font-family: "General Sans", sans-serif;
 }
 
@@ -38,7 +37,54 @@ body {
   }
 }
 
+
 @layer utilities {
+  .c-space {
+    @apply sm:px-10 px-5;
+  }
+
+  .head-text {
+    @apply sm:text-4xl text-3xl font-semibold text-gray_gradient;
+  }
+
+  .nav-ul {
+    @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
+  }
+
+  .nav-li {
+    @apply text-neutral-400 hover:text-white max-sm:hover:bg-black-500 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5;
+  }
+
+  .nav-li_a {
+    @apply text-lg md:text-base hover:text-white transition-colors;
+  }
+
+  .nav-sidebar {
+    @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+  }
+
+  .text-gray_gradient {
+    @apply bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
+  }
+
+  /* button component */
+  .btn {
+    @apply flex font-medium gap-4 items-center justify-center cursor-pointer p-3 px-8  bg-black-300  transition-all active:scale-95 mx-auto;
+  }
+
+  .btn-ping {
+    @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75;
+  }
+
+  .btn-ping_dot {
+    @apply relative inline-flex rounded-full h-3 w-3 bg-green-500;
+  }
+
+  /* hero section */
+  .hero_tag {
+    @apply text-center xl:text-7xl md:text-6xl sm:text-4xl text-3xl font-black !leading-normal;
+  }
+
   .border-hsla {
     @apply border border-white/20;
   }
@@ -141,6 +187,87 @@ body {
   .contact-clip-path-2 {
     clip-path: polygon(9% 0, 100% 0%, 90% 100%, 0% 100%);
   }
+
+  .contact-container {
+    @apply max-w-xl relative z-10 sm:px-10 px-5 mt-12 text-start;
+  }
+
+  .field-label {
+    @apply text-lg text-white-600;
+  }
+
+  .field-input {
+     @apply w-full bg-black-300 px-5 py-2 min-h-14 rounded-lg placeholder:text-white-500 text-lg text-white-800 shadow-black-200 shadow-2xl focus:outline-none;
+  }
+
+  .field-btn {
+    @apply bg-black-500 px-5 py-2 min-h-12 rounded-lg shadow-black-200 shadow-2xl flex justify-center items-center text-lg text-white gap-3;
+  }
+
+  .field-btn_arrow {
+    @apply w-2.5 h-2.5 object-contain invert brightness-0;
+  }
+
+  .date-picker {
+    @apply bg-black-500 shadow-black-200 shadow-2xl overflow-hidden border-transparent w-full  text-white placeholder:text-white-500  min-h-12 text-lg rounded-md px-3 outline-none !important;
+  }
+}
+.react-datepicker-wrapper.date-picker {
+  display: flex;
+  align-items: center;
+}
+
+.react-datepicker,
+.react-datepicker__time,
+.react-datepicker__header,
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker-time__header {
+  background-color: #1a1d21 !important;
+  border-color: #363a3d !important;
+  color: #abb8c4 !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker-time__header {
+  color: #ffffff !important;
+}
+
+.react-datepicker__triangle {
+  fill: #1a1d21 !important;
+  color: #1a1d21 !important;
+  stroke: #1a1d21 !important;
+}
+
+.react-datepicker__time-list-item:hover {
+  background-color: #363a3d !important;
+}
+
+.react-datepicker__input-container input {
+  background-color: #1a1d21 !important;
+  width: 100%;
+  outline: none;
+}
+
+.react-datepicker__day--selected {
+  background-color: #24ae7c !important;
+  color: #ffffff !important;
+  border-radius: 4px;
+}
+
+.react-datepicker__time-list-item--selected {
+  background-color: #24ae7c !important;
+}
+
+.react-datepicker__time-container {
+  border-left: 1px solid #363a3d !important;
+}
+
+.react-datepicker__time-list-item {
+  display: flex !important;
+  align-items: center !important;
 }
 
 .indicator-line {
@@ -270,4 +397,17 @@ body {
     transform: translateY(66%) scale(0.65);
     opacity: 0.8;
   }
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  animation: scroll 60s linear infinite;
 }
